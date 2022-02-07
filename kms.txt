@@ -1,0 +1,62 @@
+
+https://www.udemy.com/course/draft/393306/learn/lecture/4989304#announcements
+So, whats KMS?
+well, its standard key management service. 
+and its a management service that make its really easy
+for use to create and control the encrytion keys used to encrypt 
+your data in AWS. 
+and whats great things about KMS thats completely intergrated with 
+a lots of diff aws services and that mean ... encryting data 
+in those services. its easy to checking a box in the console
+so the services like S3, RDS , elacstic blockstorage 
+elacstic file system will all allow u to easily encrypt any data that u store 
+in these services jsut by checking a box in the console
+So by intergrating KMS with lots of diff aws services, 
+they've made thats really easily for u to encrypt your data.
+So with KMS its really simple to encrypt your data using encryption keys 
+that u manage.
+
+so when should we use KMS? 
+So basiclly we should using it when we r dealing with sensitive information. 
+SO whenever u r storing sensitive data within AWS. u should think about enckrypting it
+using KMS. So think anydata that u wantto keep secret for ex: 
+if ur storing customer data,  finalcial data, password so anything like 
+database passwords, any secrets of ur application, any credentials as well
+so that if u r storing anydata of that kind of data  in AWS u wantto thinkabout encrypting 
+that data.
+
+Now as i said earlier, KMS intergrate with most other AWS services
+and the one that'll be familar with or think like S3 RDS, dynamody, lmadda
+and the way that lambda can intergare with KMS and...it can go in
+encrypt and decrypt data provided u can get accessKMS service and 
+KMS encryption keys. its also intergrate with EBS, 
+EFS, alsoe cloud trail and its intersting thing about cloud trail
+it that u'll get order trail or all of the api calls in the KMS
+so u know ecxatly who have been using ur keys to encrypt or decrypt
+or who has been attempting to access to ur encrypted data
+It also intergrates really well oneelse with the Developer tools
+and this is just some services that i jsut wanted to highlight,  the one
+that u mightbe aware of or we gonna be learning about in this course
+
+* main features
+now, main one of the main features of KMS that u going to need
+to be aware of is this idea of the CMK.
+so whatis CMK?
+whatis stands for customer master key  
+and the customer master key is capable of encryting and decrypting data
+up to 4kbs. So u might be thinking that doesn't sound like 
+very much data, so whats that actually used for?
+well, the customer master key is used to genarate, encrypt and decrypt
+the data key. 
+and this is datakey whichis then used in turn to encrypt and decrypt data 
+and this idea of using customer master key to encrypt data key and then using that
+data key to encrypt your data. its known as "envelope encryption".
+and dont worry we gonna look at this in a little bit more detail 
+later on in this section of course. but jus tbe aware 
+that the customer master lkey can only encrypt and decrypt 
+upto 4 kbs of data. And then anything over and above that ... 
+u going to need to generate the data key.. and use that for 
+encrypt or decrypt your data.
+
+Now thats alwasy to best way to learn about aws services is get your hands dirty.
+..

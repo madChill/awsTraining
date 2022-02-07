@@ -1,0 +1,123 @@
+https://www.udemy.com/course/draft/393306/learn/lecture/18227214#notes
+
+were gonna to discuss lifecycle event hooks
+
+as u know lifecycle event hooks defines scripts that u wantto run 
+and the order we wanna run comein during the deployment
+and for the examp they really focus on understanding 
+lifecycle event hooks for in-place deployment.
+
+
+so here our example again. 
+and in the hooks section of the file
+we've got a few diff scripts running as diff stages during the deployment
+and of course the lifecycle event hooks run in specific order.
+and thats known as the RUN ORDER. 
+
+so if u see anything in these example referencing to lifecycle event hooks
+* thiss werteringaking about. 
+and we oly haveinstances load-balancer
+ i* we then have pharse 2 which is not pharse nuts and bowl of 
+ all instances and ncluded here in thiss example
+but there r actually have lots of lifecycle event hooks that u can include
+and u just include the one if u need for ur own specific deployment
+so waht ever make sense for ur own application. 
+
+so these just few example
+but im gonna show u an exhaustive list of all lifecycle event hooks 
+whcih apply to an in-place deployment
+and thats actually quite alot take in and remenber
+
+when im think about lifecyle event 
+i try and  think them as 3 diff pharses and its just the way i try to 
+remember all
+So hopefully it makes sense to u as well. 
+
+* and first of all in my pharse 1. this is all to do  with de-registering
+all instances load-balancer
+* we then have pharse 2 which is real nuts and bolts  
+of the application deployment. All these activites need to happened 
+of the application deployment itself. 
+ * and then my thirth pharse is re-registering instances of LB. 
+ so thats everything have been installed and all up running again 
+ and we re-registering instances of LB.
+
+ So let's go un... .. alittle bit for more details
+ so the first lifecycle event hooks is called before lock traffic
+ and this cover all the tasks that u want to run  
+ on instances before theyre de-registerd from a  LB.
+
+ So u have any scripts u want to run before theyre de-registerd from a LB 
+ then this's lifecycle event hooks you are going to use 
+ 
+ * the next one its called Block traffic, and thiss where we actually de-register the 
+  instances from a LB. So any scripts relating to that include in Block traffic
+ * After Block traffic is any tasks that u wanto run on instances ... after they've been 
+  de-registerd from a LB. 
+ And remember its all quite flexible and u just use lificycle event hooks that makes sense
+ your own application. 
+
+ So now, the next stage, and all about nuts and bolts of actually point application..
+ of ur instances. 
+ So the next lifecycle event hooks, were gonna lookat is APPLICATIONSTOP
+ So thiss all about gracefully stop the application  
+ So what scripts would u need to run in the order to make sure 
+ ur application shuts down gracefully
+ and of course with an in-place deployment u may well be deploying a new version
+ of an application whcihc is already installed in production  
+ So that makes sense that u going to shutdown the application  before 
+ we do anything else. 
+
+ So the next step is Downloadbunddle, and thiss where is codedeploy agents
+ copies the application revision files or the new version of ur application
+ so it copies all of ur files to temporary location 
+
+the next event is BEFOREINSTALL, so thats pre installation scripts that u want to run
+for ex that u want to backup recover version of ur application
+u might wantto backup some configuration files ..etc
+u might wantto de-crypt file from DOWNLOADBUNDLE that need de-crypting
+the nextstep is actually install the application itself
+
+and this often involves coping the application files to their final location
+
+the next step is AFTERINSTALL and this is post-installation scipts that u might wantto run
+so for ex u wanto update configuration file or u might wanto change the file permission as well
+so any scripts that u might wantto run after installation has been done, we then have
+APPLICATIONSTART so this point we then start up any services which was stoped during APPLICATIONSTOP
+that u might have script or set of common that u might want to run for APPLICATIONSTART
+and we then have VALIDATESERVICE 
+and thats covers of any test that u might wanto run to validate that the applition 
+is working as expected with a LB
+So we have BEFOREALLOWTRAFFIC which is any tasks u wanto run into instances 
+before they get re-register with the LB.
+
+ALLOWTRAFFIC so thiss when we go ahead and re-registerd with a LB 
+and then after ALLOWTRAFFIC whichs any tasks that u wanto run on instances
+after they've been re-registered with a LB 
+
+So thats all of the lifecycle event hooks for an in-plcae deployment
+now in-terms of our exam tip
+
+RUN-ORDER
+for the exam u need to understand logical flow at a high level 
+just remember if u see run order in relation of lifecycle event hooks
+then thiss what theyre talking about, theyre talking about the specific running order
+that everything runs in
+
+IN-PLACE
+and an in-place deployment, in my mind broadly 3 pharses.
+so u've got DE-REGISTER pharse .. de-gistering with the LB
+then the installation itself and everything involved in that
+and then we-ve got the re-registering with a LB
+and then finally for the exam, i say the most important things
+try and get straightin ur mind
+the order of all of these things happen  
+and if u thinkabout it, its pretty locaigcal and 
+its only the same steps that u would do 
+if u installing new version of an application manually
+so if u do see a question of an exam or not sure about how to awnser it 
+just have a think about the steps u might take
+if u were performing a manually application update 
+
+what would u do, 
+and what would the sequence of  steps look like 

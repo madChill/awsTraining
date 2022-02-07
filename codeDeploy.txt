@@ -1,0 +1,60 @@
+https://www.udemy.com/course/draft/393306/learn/lecture/6502072#notes
+2 types: in-place and blue-green.
+
+
+appSpec.yml file 
+with code deploy for EC2 and on-premises only allow yml file
+
+File structure: 
+    version
+    os: operation system version
+    files: the location of any application files that need to be copied
+    hooks:lifecycle event hooks
+
+Script: might be used during ec2 deployment
+
+So youre going to want to run them at specific points in your 
+deployment lifecycle.
+
+we've got:  version: 
+    os: 
+    files: which specific any files and location  u want to copy and during the deployment
+     so you wanto copy source and destination
+    
+    hooks section: this is lifecycle hooks, and thisis where specific files
+        scripts u wanto run them during the deployment. 
+
+    hooks run in a very specific order.
+    this is defined these parameter here. 
+    and this is 
+
+    root of folder is appspec.yml.
+    and evething else is organizeed into its own folder
+    so we can have scripts folder 
+
+    Scripts folder containes thats scripts you wantto run.
+    the config folder which has any configuration files
+    and the source folder contains any application source code
+
+    4:11  
+
+    remember configuration file ... and we used to define 
+    parameter whcih we going to use by codedeploy during the deployment
+    so ex: operation system version. 
+        any files will be going to copy during the deployment. 
+        and the lifice hooks which defines the scripts
+        that you wantto run during the deployment and when to run them. 
+
+    the appspec.yml always leaves in root of your revision directory.
+    and then eveething else organized into folders 
+    usually a folder containing scripts config files and source code.
+
+    and then the lifecycle event hooks has very specific run order
+    and they use to define certain scripts will run
+    during the lifecycle of your deployment.
+    
+    and were going take a look of lifecycle event hooks in next lecture 
+    So thats end of this lecture. if u have any questions pls let me know
+    if not feel free to move on next lecture. 
+    
+

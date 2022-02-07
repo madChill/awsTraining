@@ -1,0 +1,30 @@
+https://www.udemy.com/course/draft/393306/learn/lecture/2314430#announcements
+
+whichis going to cover the SQS or simple queue service
+and SQS is actually the first AWS service that was publicly avaiable, 
+so thisis one of the oldest services what they have 
+but u only need to know about it as a very high level.
+So what is SQS?? whatis the basiclly a messages queue service. 
+So it give u access to the message queue.
+whcih can be used to store messages while waiting an application or a computer
+to process them. so it enables webservice applications to quickly and reliably
+queue messages that one component in the application generates
+for another component to consume. 
+so what do we mean when we say a queue
+so a queue is a temporary repository for messages which are waitting 
+processing. 
+a sound like a bit abstract, dont worry 
+because its a easiest way to understand it
+is if I show u a couple of examples. 
+so my first example its a meme website.
+so here's our user, so they wanto upload an image whichis going to turn to 
+a meme. So here's a picture of me and Ryan at the ACS office in London
+So the photo is goign to be uploaded to a website and our website
+is going to store the photo in an S3 bucket. 
+So once the photo is uploaded to S3 that is going to trigger lambda function
+and the lambda function isgoing to send all the data associated with this images 
+into SQS. So this data might include the words that we wanto add to the photo, 
+maybe the color of the texts.
+The position on the photo where we want to display the texts, 
+maybe the name of the S3 bucket that its stored and maybe the name of 
+user who owns the image. 

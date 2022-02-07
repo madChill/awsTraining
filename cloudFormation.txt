@@ -1,0 +1,166 @@
+https://www.udemy.com/course/draft/393306/learn/lecture/11937656#notes
+
+now CF is a service it allow u manage, config and provision
+your aws infrastructure as code
+
+and the resources all ... resoures that u going to provision or defined using the CF template
+ thats code element  
+and the CF it takes that template in interprets it and make the propreate api calls
+in order to create the resources that u have defined in the template
+and the template supports either yml and json
+so u can use the yml or json whcihever u are comfortable with
+to create ur CF templates. 
+So what are some of the benefits of CF
+well,  firstlly it allow u to provision ur infrastructure in a really consistant way
+So its the same wvery single time
+and .. fewer mistakes  because its less opportunity for human error
+it takes less time and effort than u would 
+if u were to configure things manually
+- u can also version control and peer review ur template
+- and its free to u, however u'll be charged for any resources that u created
+- it can be used manage update to existing CF platforms
+- and it can also handled dependences betwwen resources to ensure 
+resources r created in the correct order.
+- and it can alse be used to easily and quickly rollback 
+or delete the entire stack that u've created 
+with CF as well.
+- its really easy to clearup the environment that was temporary or just being 
+used to test something ... u can really quickly have CF rollback and delete 
+whole lot for u as well
+So let take a look a CF process in a littlebit detail
+once again u can use yml or json to describle the end state
+of the infrastructure u r either provisioning or changing
+
+once u've created the template u uploaded the CF using S3.
+so within CF console u actually upload it, enzip it to an S3 bucket
+- and then CF accesses the template with in S3 bucket. it reads the template and 
+makes the propreate api callson ur behalf to create resources for u. 
+- and the resulting resources are refered as a stack and its called 
+"CF stack"
+
+so, let's have a look at an example CF template, 
+
+most of these options parameters r optional
+it only resources section will see on the next slide 
+thats madatory, so everything else that u can see in this page r optional
+so firstly, first of all, we have the template FORMATVERSION 
+and the only supported version is 2009-09-09
+and thats just referes to template format  
+So the acceptable all the supported template format for CF template
+
+-- moving on we have the "description" 
+and of course thiss optional. 
+So u can just add in a desciprtion of ur choice,  something meaningful to u
+SO in this case, it just describing its as a template to create an EC2 instance
+Next, its the "Metadata"..  thats simply data about message data.. 
+once again its compltely optional,so u can just put it in a custome field
+
+and for this one we r just providing.. about some the percific instances
+thiss CF template is going to provision.
+So just keep a description of webserver instance
+
+moving down PARAMETER. So these r input values that u actually input 
+to CF when u go ahead launch and stack using template
+so thiss infomation u need to provide u go ahead u launch and stack
+and in this case we r defining enviroment type..
+and then the allowed values or either prod or test, 
+
+So u need to provide that when we actually go ahead launch or stack using this template
+
+and then the next parameter is CONDITION, and we can use the condition once again 
+competly user defined, and we can actaully use this to testa condition. 
+and take action bases on the outcome of testing that condition
+So in this case we'r evaluating the parameters and type
+whichs declared from previous section 
+of the parameter section
+So we'r evaluating that and we r saying if its equal prod 
+then we should create prod resources only. So u can this to tell CF
+to make decisions based on parameters that u've input at launch time
+ Moving on mapping, and u can use mapping to setup own user defined value
+ So  for ex u can set the value of an AMI bases on the region 
+ so we can completetly define this ourself 
+ so for ex: for eu-west-1: thats an AMI that wer going to use
+ so "u can defins a different AMI for every diff region "
+ u " can define diff AIM for an diff environtment ".
+ its all flexible and completly user defined.
+
+ the next section is TRANSFROM, its quite important because it allow u to 
+ actually include snippets of code whcih r outside the main template
+ now u can either include for example code for the lambda function
+ u could include all code u want to include.. there r also alots of snippets
+ whcih actually aws provide and im just gonna show u the webpage where u can
+ find these.
+
+So im just gonna search for CF "snippets"..
+and there r whole lots of diff examples, senariors
+that u can use to allow u to declare various diff CF template parts.
+So for ex as template snippets for dynamodb.. for ec2, elacstic container service
+RDS, route53..ect, ect. 
+lots of also diff resoures that they've provided this example code for
+So for ex, if we take a look with dynamodb one
+its got an ex piece of code for creating dynamodb table
+its very diff often properties and attributes
+global secondary indexes.. provisionthoughput.. etc etc
+
+all of diff things u need to defines for a dynamodb table and 
+this ex here is in json and 
+they also show u it in yml as well 
+so, u can actually create resuable pieces of code 
+whichs store in S3 and CF will allow u
+to reference that within ur CF template
+
+So once again it just allow u to reuse code maintaince consistancy throughout ur codebase
+
+then moving on the RESOURCES section.
+so this section of the file is the most important and 
+this is where u defines the AWS resources that u want the CF to 
+deploy for u
+So in this case we're gonna be deploy an EC2 instance
+where r defining the intance type as a tt.micro
+and we also specify which AMI we want to use as well
+and of course thiss "resources section is the only madatory section 
+of the CF template."
+and finally, the last section of this example template is the output section
+and again thiss completely user defined
+and its particular template,  "it gets u to 2 outputs"
+the instance id of the EC2 instance that we'r provisioning
+and the outputs u can see them in the console and "it also be input"
+into another CF stack as well.
+so u dont need to know template off by heart... unlikely 
+they're gonna ask u really detailed questions about it in the exam.
+But its important  to understand what case ... to me or 
+CF, what all diff sections r used for?
+-  remember that the reousces section is the most important section
+and its the only madatory section of the template
+- and also remembre the transform section, thats whats used to references to 
+additional code stored in S3. it allow the code reuse for ex u can specify lambda code
+or template snippets or resuable pieces of CF code
+
+--end compose
+so lets take a look some all exam tips for CF
+CF allow u manage, configure and provision AWS infrastruction as code
+and remmeber we use either yaml or json for CF template file.
+and remeber the main section of CF template 
+so we hve parameters which allow u to input custom values
+and in the example we use an environment type so in that example
+CF will expect u to state whcih enviroments the resource r going to use be for..
+for ex prod or test.. 
+- Conditions r used to make desisions or test based on the set of parameters
+for ex it will allow u to provision resources based on the environment
+if u use the environment parameter
+- the REOUSCES section remember thats madatorysection and defines all the AWS resources
+to create and that could be an S3 bucket, EC2 instance or RDS database
+dynamodb database, pretty much anything u can thik off within AWS
+u can create at a reousce in AWS CF
+- Mappings allow u to create custome mapping for ex.. mapping a diff AMI to a diff region 
+so just depending whcihs region u r  working in
+u can tell CF to use specific AMI for that region.. 
+- and finnaly TRANSFORM so it allow u to reference code located in S3
+for lambde code or reusable snippets CF code and both of those located in S3
+
+However the best way to learn CF its definitely start using it 
+ and get your hands dirty with it
+ and thats exactly what were going to do in the next lecture
+ so the next lecture is going to be a lab..
+ so if u have time please join me in the next lecture. THank u
+
