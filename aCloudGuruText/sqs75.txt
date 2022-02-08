@@ -28,3 +28,89 @@ maybe the color of the texts.
 The position on the photo where we want to display the texts, 
 maybe the name of the S3 bucket that its stored and maybe the name of 
 user who owns the image. 
+all this dataa can be enclosed in the message and send t SQS. 
+and this message will sit in SQS watting to be processed. 
+then u might have a fleet of EC2 instances 
+and what they do is pull SQS queue looking for messages
+or essentially looking for next task to complete.
+so u can think of SQS as a way to asigning jobs or tasks for an 
+application to complete. 
+so a job go into the queue in a form of a message
+and your ec2 instances constantly pull that queue looking for work. 
+So they find the message and then they set the work creating the meme. 
+they add the text to the photo and then the ec2 instance then stores the meme
+in S3. 
+
+and once finish that job it goes back to SQS queue again
+and look for next job to do and u can actually config auto scaling groups
+of EC2 instances which automatically scale base on number of messages
+currently in the SQS queue. 
+
+So if u get a massive surge of the messages in the queue this can trigger 
+auto scaling group to launch additional instances
+to cope with the increased number of messages or job to complete. 
+And if u have a reduced the number of messages in the queue. 
+Auto scaling also reduce the number of Ec2 instances needed to process
+the messages
+
+Now the great thing about this kind of architecture is that 
+if u lose an ec2 instance before the job has been completed sucessfully 
+before it managed to complete the task and save the meme to our S3 bucket
+and u wanto lose your job itself because its still goign to be in the queue. 
+Then another instance can go in to pickup the message in the queue
+and start to processing it. 
+
+TraVEL WEB DEMO. 
+so lets now take a look at a difference example, 
+and this time its a travel website and herer our user
+and shes searching a holiday, so shes loking a beach holiday
+and she wants to get best posible flights avaiable. 
+So our user heads to the travel website types in their search criteria. 
+So the destination prefered the dates the city that they're travelling from. 
+and this time our website is running on the ec2 instances. 
+so there r our all service. 
+And the web server will take the users search criteria and package it up 
+as a message in SQS queue. and then the queue is pulled by another ec2 instance
+so thiss our application server and its actually pulling the messages down
+from the queue, and thiss key for SQS. So any application which is going to consume 
+SQS messages needs to pull the queue to get the messages. 
+and u may come across in this example where they give u a senarior
+and they ask u to select to pull based system or push based system
+for messaging between application components. 
+ 
+SO if they r asking for a pull based service then there r usually 
+talking about SQS. 
+however, if they r asking u about push based system then u need something like 
+simple notification service or SNS whichis anoter service that we going to covering 
+later on in this section of the course. 
+So we've got the ec2 instances here, they r constantly pulling the queue, looking for  new 
+messages and lking for next job to do. 
+So they pickup the messages as it comes in and begin process it. 
+So lets say our user wants to fly from london to italy. 
+our application server is going to start sending queries to all different airlines, 
+to find the best flights bases on users search critiria. 
+Once its recieved the response from the all airlines
+it then send the information back to our webserver. 
+Which provides everything to our user. 
+So she can select flights she likes the best. 
+and once again the great thing about SQS is that any
+of our application servers crash.. any messages which are partially processed
+will not be deleted and will end up back to the queue. 
+And thiss becasue when a message is first picked up by our application server
+it going to be marked as invisible... 
+So that no other application server can stop processing that message.
+and thats called the visibility timeout. And thiss amount of time 
+that the application server gets to process the message and as soon as
+that window has expired if the message has not been completely processed. 
+that'll appear in the queue again, and another application server will pickup 
+that message and begin processing it. 
+SO thats great thing about SQS, and by using SQS r removing dependences
+between individual components in your application. 
+So ur application server can fail. but the job itself and the information
+held in our users query isn't lost. 
+and they call this decouping your infrastructure. 
+So if u see anything in the exam is refering to decoupling infrastructure. 
+Then they r talking about SQS.. 
+
+SQS features. 
+7.58
