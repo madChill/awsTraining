@@ -1,0 +1,14 @@
+https://www.udemy.com/course/draft/393306/learn/lecture/25334704#announcements
+
+cover SQS settings and parameters that u need to know in the exam. 
+[visibility timeout]:
+    Starting with visibility timeout, and we touch upon the briefly 
+    and one of the previous lectures but its an important topic 
+    in the exam. 
+    So i wanted go to a bit more detail so that ur completely comfortable 
+    with how it all works. 
+
+    So visibility timeout its the amount of time a message its invisible
+    in the SQS queue, after a reader or a consumer pickup that message. 
+    So here r our application service.  
+    0:45

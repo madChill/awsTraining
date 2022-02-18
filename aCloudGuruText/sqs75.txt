@@ -112,5 +112,53 @@ and they call this decouping your infrastructure.
 So if u see anything in the exam is refering to decoupling infrastructure. 
 Then they r talking about SQS.. 
 
-SQS features. 
-7.58
+[decopuling]So using SQS u can decouple your infrastructure components, so u can 
+decouple components of an application, allowing them to run independently
+and easing messages between components. 
+for example if u have one component which is running alot more quicky than 
+another or ur creating jobs faster than ur application service 
+can process them. then having a sqs in the middle, make sure those
+components can run dependently and that one doesn't get overloaded
+and the tasks and jobs r not lost due to ur application service 
+being overloaded
+[Store messages]any components of a distributed application can store 
+messages in the queue and messages can contain up to 256kb of text
+in any format
+for ex: xml, json or plain text format. 
+and any component can later retrive the messages promatictly
+using aws SQS api.
+And SQS effectively add a buffer between the components of ur application. 
+so SQS acts as a buffer between component receiving the data processing 
+and the component producing the data and saving the data. 
+And in our meme website example, the component receiving data was of course
+lambda function and the component reducing and saving data was our EC2 instance.
+So with the complex distributed application using SQS help to resolve scheduling 
+issues between various different components.
+So the queue resolves issues which arise, if the producer is producing work 
+faster than the comsummer can process it. 
+Or the producer and consummer are only intermmitely connected to the network. 
+So it resolves issuses if one of ur application components is running slowly  
+if an application server fails or reaching out internal network or network 
+connectivity gets interrupted.
+
+SQS key facts
+.that its pull based, its not push based
+.The messages can be upto 256kb in size
+.messages are always takes data including xml, json and unfomatted plaintext.. 
+.its guarantee that the messages will be processed at least once. 
+.the retension period of messages is upto 14 days. So the messages 
+can be kept in the queue from between 1 minute to 14 days. So the minumum is 1 minute
+and the maximum is 14days. But the default retension is 4 days. 
+
+[example tips]
+main thing to remember for this lecture is that SQS is distributed message 
+queueing system. 
+And it allows us to decouple the components of our application
+so that they r independent. 
+And one of our application server crashes before they've completed the task,
+ur not going to lose the task becasue they will be appear in the queue again. 
+and finally, remember that SQS is pull based, not push based system. 
+So that our application server pulling the queue that pulling down the messages. 
+They r not being to push out. 
+So that SQS is high level, dont worry u only need to know 
+its very high level for this exam. 
